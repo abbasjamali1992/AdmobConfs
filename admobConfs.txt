@@ -84,8 +84,7 @@
       }
     ]
   }
-}
-{
+}{
         "remarks": "Or-Ads-Config",
         "log": {
             "loglevel": "debug"
