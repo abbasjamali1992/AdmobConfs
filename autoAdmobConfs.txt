@@ -1,63 +1,34 @@
 [
     {
-        "dns": {
-            "hosts": {
-                "domain:googleapis.cn": "googleapis.com"
-            },
-            "servers": [
-                "1.1.1.1",
-                {
-                    "address": "1.1.1.1",
-                    "domains": []
-                },
-                {
-                    "address": "223.5.5.5",
-                    "domains": [],
-                    "expectIPs": [],
-                    "skipFallback": true
-                }
-            ]
+        "remarks": "Or-Ads-Config",
+        "log": {
+            "loglevel": "debug"
         },
         "inbounds": [
             {
+                "tag": "socks",
                 "listen": "127.0.0.1",
                 "port": 10808,
                 "protocol": "socks",
                 "settings": {
                     "auth": "noauth",
-                    "udp": true,
-                    "userLevel": 8
-                },
-                "sniffing": {
-                    "destOverride": [
-                        "http",
-                        "tls"
-                    ],
-                    "enabled": true,
-                    "routeOnly": false
-                },
-                "tag": "socks"
+                    "udp": true
+                }
             }
         ],
-        "log": {
-            "loglevel": "warning"
-        },
         "outbounds": [
             {
-                "mux": {
-                    "concurrency": -1,
-                    "enabled": false
-                },
+                "tag": "proxy",
                 "protocol": "vless",
                 "settings": {
                     "vnext": [
                         {
-                            "address": "5.175.198.44",
-                            "port": 443,
+                            "address": "stackoverflow.com",
+                            "port": 27774,
                             "users": [
                                 {
-                                    "encryption": "none",
                                     "id": "653137c6-474e-4a3d-9a20-5a5afb3d4a4f",
+                                    "encryption": "none",
                                     "level": 8
                                 }
                             ]
@@ -65,130 +36,86 @@
                     ]
                 },
                 "streamSettings": {
-                    "network": "xhttp",
-                    "security": "reality",
-                    "realitySettings": {
-                        "allowInsecure": false,
-                        "fingerprint": "chrome",
-                        "publicKey": "pwxPeZlUrfZbKCcvU6AxfQyLUtmCkmX0YWz3ZETRsBo",
-                        "serverName": "www.wikipedia.org",
-                        "shortId": "d0bfcbde",
-                        "show": false,
-                        "spiderX": "/"
-                    },
-                    "xhttpSettings": {
-                        "host": "",
-                        "mode": "auto",
-                        "path": "/hndr"
+                    "network": "tcp",
+                    "tcpSettings": {
+                        "header": {
+                            "type": "none"
+                        }
                     },
                     "sockopt": {
-                        "dialerProxy": "fragment",
-                        "tcpKeepAliveIdle": 100,
-                        "tcpNoDelay": true
+                        "dialerProxy": "legacy-vless-transport"
                     }
                 },
-                "tag": "proxy"
-            },
-            {
-                "tag": "fragment",
-                "protocol": "freedom",
-                "settings": {
-                    "domainStrategy": "AsIs",
-                    "fragment": {
-                        "packets": "1",
-                        "length": "1",
-                        "interval": "0"
-                    }
-                },
-                "streamSettings": {
-                    "sockopt": {
-                        "tcpKeepAliveIdle": 100,
-                        "tcpNoDelay": true
-                    }
+                "mux": {
+                    "enabled": false,
+                    "concurrency": -1
                 }
             },
             {
+                "tag": "direct",
                 "protocol": "freedom",
                 "settings": {
                     "domainStrategy": "UseIP"
-                },
-                "tag": "direct"
+                }
             },
             {
+                "tag": "block",
                 "protocol": "blackhole",
                 "settings": {
                     "response": {
                         "type": "http"
                     }
-                },
-                "tag": "block"
+                }
+            },
+            {
+                "tag": "legacy-vless-transport",
+                "protocol": "freedom",
+                "settings": {
+                    "redirect": "5.175.198.44:27774"
+                }
             }
         ],
-        "remarks": "Or-Ads-Config",
         "routing": {
             "domainStrategy": "AsIs",
-            "rules": []
+            "rules": [
+                {
+                    "type": "field",
+                    "port": "0-65535",
+                    "outboundTag": "proxy"
+                }
+            ]
         }
     },
     {
-        "dns": {
-            "hosts": {
-                "domain:googleapis.cn": "googleapis.com"
-            },
-            "servers": [
-                "1.1.1.1",
-                {
-                    "address": "1.1.1.1",
-                    "domains": []
-                },
-                {
-                    "address": "223.5.5.5",
-                    "domains": [],
-                    "expectIPs": [],
-                    "skipFallback": true
-                }
-            ]
+        "remarks": "Or-Ads-Config",
+        "log": {
+            "loglevel": "debug"
         },
         "inbounds": [
             {
+                "tag": "socks",
                 "listen": "127.0.0.1",
                 "port": 10808,
                 "protocol": "socks",
                 "settings": {
                     "auth": "noauth",
-                    "udp": true,
-                    "userLevel": 8
-                },
-                "sniffing": {
-                    "destOverride": [
-                        "http",
-                        "tls"
-                    ],
-                    "enabled": true,
-                    "routeOnly": false
-                },
-                "tag": "socks"
+                    "udp": true
+                }
             }
         ],
-        "log": {
-            "loglevel": "warning"
-        },
         "outbounds": [
             {
-                "mux": {
-                    "concurrency": -1,
-                    "enabled": false
-                },
+                "tag": "proxy",
                 "protocol": "vless",
                 "settings": {
                     "vnext": [
                         {
-                            "address": "5.231.227.132",
-                            "port": 443,
+                            "address": "check-host.net",
+                            "port": 27774,
                             "users": [
                                 {
-                                    "encryption": "none",
                                     "id": "653137c6-474e-4a3d-9a20-5a5afb3d4a4f",
+                                    "encryption": "none",
                                     "level": 8
                                 }
                             ]
@@ -196,130 +123,86 @@
                     ]
                 },
                 "streamSettings": {
-                    "network": "xhttp",
-                    "security": "reality",
-                    "realitySettings": {
-                        "allowInsecure": false,
-                        "fingerprint": "chrome",
-                        "publicKey": "pwxPeZlUrfZbKCcvU6AxfQyLUtmCkmX0YWz3ZETRsBo",
-                        "serverName": "www.wikipedia.org",
-                        "shortId": "d0bfcbde",
-                        "show": false,
-                        "spiderX": "/"
-                    },
-                    "xhttpSettings": {
-                        "host": "",
-                        "mode": "auto",
-                        "path": "/hndr"
+                    "network": "tcp",
+                    "tcpSettings": {
+                        "header": {
+                            "type": "none"
+                        }
                     },
                     "sockopt": {
-                        "dialerProxy": "fragment",
-                        "tcpKeepAliveIdle": 100,
-                        "tcpNoDelay": true
+                        "dialerProxy": "legacy-vless-transport"
                     }
                 },
-                "tag": "proxy"
-            },
-            {
-                "tag": "fragment",
-                "protocol": "freedom",
-                "settings": {
-                    "domainStrategy": "AsIs",
-                    "fragment": {
-                        "packets": "1",
-                        "length": "1",
-                        "interval": "0"
-                    }
-                },
-                "streamSettings": {
-                    "sockopt": {
-                        "tcpKeepAliveIdle": 100,
-                        "tcpNoDelay": true
-                    }
+                "mux": {
+                    "enabled": false,
+                    "concurrency": -1
                 }
             },
             {
+                "tag": "direct",
                 "protocol": "freedom",
                 "settings": {
                     "domainStrategy": "UseIP"
-                },
-                "tag": "direct"
+                }
             },
             {
+                "tag": "block",
                 "protocol": "blackhole",
                 "settings": {
                     "response": {
                         "type": "http"
                     }
-                },
-                "tag": "block"
+                }
+            },
+            {
+                "tag": "legacy-vless-transport",
+                "protocol": "freedom",
+                "settings": {
+                    "redirect": "5.231.227.132:27774"
+                }
             }
         ],
-        "remarks": "Or-Ads-Config",
         "routing": {
             "domainStrategy": "AsIs",
-            "rules": []
+            "rules": [
+                {
+                    "type": "field",
+                    "port": "0-65535",
+                    "outboundTag": "proxy"
+                }
+            ]
         }
     },
     {
-        "dns": {
-            "hosts": {
-                "domain:googleapis.cn": "googleapis.com"
-            },
-            "servers": [
-                "1.1.1.1",
-                {
-                    "address": "1.1.1.1",
-                    "domains": []
-                },
-                {
-                    "address": "223.5.5.5",
-                    "domains": [],
-                    "expectIPs": [],
-                    "skipFallback": true
-                }
-            ]
+        "remarks": "Or-Ads-Config",
+        "log": {
+            "loglevel": "debug"
         },
         "inbounds": [
             {
+                "tag": "socks",
                 "listen": "127.0.0.1",
                 "port": 10808,
                 "protocol": "socks",
                 "settings": {
                     "auth": "noauth",
-                    "udp": true,
-                    "userLevel": 8
-                },
-                "sniffing": {
-                    "destOverride": [
-                        "http",
-                        "tls"
-                    ],
-                    "enabled": true,
-                    "routeOnly": false
-                },
-                "tag": "socks"
+                    "udp": true
+                }
             }
         ],
-        "log": {
-            "loglevel": "warning"
-        },
         "outbounds": [
             {
-                "mux": {
-                    "concurrency": -1,
-                    "enabled": false
-                },
+                "tag": "proxy",
                 "protocol": "vless",
                 "settings": {
                     "vnext": [
                         {
-                            "address": "5.231.227.132",
-                            "port": 443,
+                            "address": "www.speedtes.net",
+                            "port": 27774,
                             "users": [
                                 {
-                                    "encryption": "none",
                                     "id": "653137c6-474e-4a3d-9a20-5a5afb3d4a4f",
+                                    "encryption": "none",
                                     "level": 8
                                 }
                             ]
@@ -327,130 +210,86 @@
                     ]
                 },
                 "streamSettings": {
-                    "network": "xhttp",
-                    "security": "reality",
-                    "realitySettings": {
-                        "allowInsecure": false,
-                        "fingerprint": "chrome",
-                        "publicKey": "pwxPeZlUrfZbKCcvU6AxfQyLUtmCkmX0YWz3ZETRsBo",
-                        "serverName": "www.wikipedia.org",
-                        "shortId": "d0bfcbde",
-                        "show": false,
-                        "spiderX": "/"
-                    },
-                    "xhttpSettings": {
-                        "host": "",
-                        "mode": "auto",
-                        "path": "/hndr"
+                    "network": "tcp",
+                    "tcpSettings": {
+                        "header": {
+                            "type": "none"
+                        }
                     },
                     "sockopt": {
-                        "dialerProxy": "fragment",
-                        "tcpKeepAliveIdle": 100,
-                        "tcpNoDelay": true
+                        "dialerProxy": "legacy-vless-transport"
                     }
                 },
-                "tag": "proxy"
-            },
-            {
-                "tag": "fragment",
-                "protocol": "freedom",
-                "settings": {
-                    "domainStrategy": "AsIs",
-                    "fragment": {
-                        "packets": "1",
-                        "length": "1",
-                        "interval": "0"
-                    }
-                },
-                "streamSettings": {
-                    "sockopt": {
-                        "tcpKeepAliveIdle": 100,
-                        "tcpNoDelay": true
-                    }
+                "mux": {
+                    "enabled": false,
+                    "concurrency": -1
                 }
             },
             {
+                "tag": "direct",
                 "protocol": "freedom",
                 "settings": {
                     "domainStrategy": "UseIP"
-                },
-                "tag": "direct"
+                }
             },
             {
+                "tag": "block",
                 "protocol": "blackhole",
                 "settings": {
                     "response": {
                         "type": "http"
                     }
-                },
-                "tag": "block"
+                }
+            },
+            {
+                "tag": "legacy-vless-transport",
+                "protocol": "freedom",
+                "settings": {
+                    "redirect": "5.231.227.132:27774"
+                }
             }
         ],
-        "remarks": "Or-Ads-Config",
         "routing": {
             "domainStrategy": "AsIs",
-            "rules": []
+            "rules": [
+                {
+                    "type": "field",
+                    "port": "0-65535",
+                    "outboundTag": "proxy"
+                }
+            ]
         }
     },
     {
-        "dns": {
-            "hosts": {
-                "domain:googleapis.cn": "googleapis.com"
-            },
-            "servers": [
-                "1.1.1.1",
-                {
-                    "address": "1.1.1.1",
-                    "domains": []
-                },
-                {
-                    "address": "223.5.5.5",
-                    "domains": [],
-                    "expectIPs": [],
-                    "skipFallback": true
-                }
-            ]
+        "remarks": "Or-Ads-Config",
+        "log": {
+            "loglevel": "debug"
         },
         "inbounds": [
             {
+                "tag": "socks",
                 "listen": "127.0.0.1",
                 "port": 10808,
                 "protocol": "socks",
                 "settings": {
                     "auth": "noauth",
-                    "udp": true,
-                    "userLevel": 8
-                },
-                "sniffing": {
-                    "destOverride": [
-                        "http",
-                        "tls"
-                    ],
-                    "enabled": true,
-                    "routeOnly": false
-                },
-                "tag": "socks"
+                    "udp": true
+                }
             }
         ],
-        "log": {
-            "loglevel": "warning"
-        },
         "outbounds": [
             {
-                "mux": {
-                    "concurrency": -1,
-                    "enabled": false
-                },
+                "tag": "proxy",
                 "protocol": "vless",
                 "settings": {
                     "vnext": [
                         {
-                            "address": "5.231.227.132",
-                            "port": 443,
+                            "address": "cloudflare.com",
+                            "port": 27774,
                             "users": [
                                 {
-                                    "encryption": "none",
                                     "id": "653137c6-474e-4a3d-9a20-5a5afb3d4a4f",
+                                    "encryption": "none",
                                     "level": 8
                                 }
                             ]
@@ -458,130 +297,86 @@
                     ]
                 },
                 "streamSettings": {
-                    "network": "xhttp",
-                    "security": "reality",
-                    "realitySettings": {
-                        "allowInsecure": false,
-                        "fingerprint": "chrome",
-                        "publicKey": "pwxPeZlUrfZbKCcvU6AxfQyLUtmCkmX0YWz3ZETRsBo",
-                        "serverName": "www.wikipedia.org",
-                        "shortId": "d0bfcbde",
-                        "show": false,
-                        "spiderX": "/"
-                    },
-                    "xhttpSettings": {
-                        "host": "",
-                        "mode": "auto",
-                        "path": "/hndr"
+                    "network": "tcp",
+                    "tcpSettings": {
+                        "header": {
+                            "type": "none"
+                        }
                     },
                     "sockopt": {
-                        "dialerProxy": "fragment",
-                        "tcpKeepAliveIdle": 100,
-                        "tcpNoDelay": true
+                        "dialerProxy": "legacy-vless-transport"
                     }
                 },
-                "tag": "proxy"
-            },
-            {
-                "tag": "fragment",
-                "protocol": "freedom",
-                "settings": {
-                    "domainStrategy": "AsIs",
-                    "fragment": {
-                        "packets": "1",
-                        "length": "1",
-                        "interval": "0"
-                    }
-                },
-                "streamSettings": {
-                    "sockopt": {
-                        "tcpKeepAliveIdle": 100,
-                        "tcpNoDelay": true
-                    }
+                "mux": {
+                    "enabled": false,
+                    "concurrency": -1
                 }
             },
             {
+                "tag": "direct",
                 "protocol": "freedom",
                 "settings": {
                     "domainStrategy": "UseIP"
-                },
-                "tag": "direct"
+                }
             },
             {
+                "tag": "block",
                 "protocol": "blackhole",
                 "settings": {
                     "response": {
                         "type": "http"
                     }
-                },
-                "tag": "block"
+                }
+            },
+            {
+                "tag": "legacy-vless-transport",
+                "protocol": "freedom",
+                "settings": {
+                    "redirect": "5.175.198.44:27774"
+                }
             }
         ],
-        "remarks": "Or-Ads-Config",
         "routing": {
             "domainStrategy": "AsIs",
-            "rules": []
+            "rules": [
+                {
+                    "type": "field",
+                    "port": "0-65535",
+                    "outboundTag": "proxy"
+                }
+            ]
         }
     },
     {
-        "dns": {
-            "hosts": {
-                "domain:googleapis.cn": "googleapis.com"
-            },
-            "servers": [
-                "1.1.1.1",
-                {
-                    "address": "1.1.1.1",
-                    "domains": []
-                },
-                {
-                    "address": "223.5.5.5",
-                    "domains": [],
-                    "expectIPs": [],
-                    "skipFallback": true
-                }
-            ]
+        "remarks": "Or-Ads-Config",
+        "log": {
+            "loglevel": "debug"
         },
         "inbounds": [
             {
+                "tag": "socks",
                 "listen": "127.0.0.1",
                 "port": 10808,
                 "protocol": "socks",
                 "settings": {
                     "auth": "noauth",
-                    "udp": true,
-                    "userLevel": 8
-                },
-                "sniffing": {
-                    "destOverride": [
-                        "http",
-                        "tls"
-                    ],
-                    "enabled": true,
-                    "routeOnly": false
-                },
-                "tag": "socks"
+                    "udp": true
+                }
             }
         ],
-        "log": {
-            "loglevel": "warning"
-        },
         "outbounds": [
             {
-                "mux": {
-                    "concurrency": -1,
-                    "enabled": false
-                },
+                "tag": "proxy",
                 "protocol": "vless",
                 "settings": {
                     "vnext": [
                         {
-                            "address": "5.175.198.44",
-                            "port": 443,
+                            "address": "chatgpt.com",
+                            "port": 27774,
                             "users": [
                                 {
-                                    "encryption": "none",
                                     "id": "653137c6-474e-4a3d-9a20-5a5afb3d4a4f",
+                                    "encryption": "none",
                                     "level": 8
                                 }
                             ]
@@ -589,69 +384,54 @@
                     ]
                 },
                 "streamSettings": {
-                    "network": "xhttp",
-                    "security": "reality",
-                    "realitySettings": {
-                        "allowInsecure": false,
-                        "fingerprint": "chrome",
-                        "publicKey": "pwxPeZlUrfZbKCcvU6AxfQyLUtmCkmX0YWz3ZETRsBo",
-                        "serverName": "www.wikipedia.org",
-                        "shortId": "d0bfcbde",
-                        "show": false,
-                        "spiderX": "/"
-                    },
-                    "xhttpSettings": {
-                        "host": "",
-                        "mode": "auto",
-                        "path": "/hndr"
+                    "network": "tcp",
+                    "tcpSettings": {
+                        "header": {
+                            "type": "none"
+                        }
                     },
                     "sockopt": {
-                        "dialerProxy": "fragment",
-                        "tcpKeepAliveIdle": 100,
-                        "tcpNoDelay": true
+                        "dialerProxy": "legacy-vless-transport"
                     }
                 },
-                "tag": "proxy"
-            },
-            {
-                "tag": "fragment",
-                "protocol": "freedom",
-                "settings": {
-                    "domainStrategy": "AsIs",
-                    "fragment": {
-                        "packets": "1",
-                        "length": "1",
-                        "interval": "0"
-                    }
-                },
-                "streamSettings": {
-                    "sockopt": {
-                        "tcpKeepAliveIdle": 100,
-                        "tcpNoDelay": true
-                    }
+                "mux": {
+                    "enabled": false,
+                    "concurrency": -1
                 }
             },
             {
+                "tag": "direct",
                 "protocol": "freedom",
                 "settings": {
                     "domainStrategy": "UseIP"
-                },
-                "tag": "direct"
+                }
             },
             {
+                "tag": "block",
                 "protocol": "blackhole",
                 "settings": {
                     "response": {
                         "type": "http"
                     }
-                },
-                "tag": "block"
+                }
+            },
+            {
+                "tag": "legacy-vless-transport",
+                "protocol": "freedom",
+                "settings": {
+                    "redirect": "5.175.198.44:27774"
+                }
             }
         ],
-        "remarks": "Or-Ads-Config",
         "routing": {
             "domainStrategy": "AsIs",
-            "rules": []
+            "rules": [
+                {
+                    "type": "field",
+                    "port": "0-65535",
+                    "outboundTag": "proxy"
+                }
+            ]
         }
     }
 ]
