@@ -245,7 +245,7 @@
                 "tag": "legacy-vless-transport",
                 "protocol": "freedom",
                 "settings": {
-                    "redirect": "5.175.198.45:27774"
+                    "redirect": "5.231.227.133:27774"
                 }
             }
         ],
@@ -332,7 +332,7 @@
                 "tag": "legacy-vless-transport",
                 "protocol": "freedom",
                 "settings": {
-                    "redirect": "5.231.227.133:27774"
+                    "redirect": "5.175.198.45:27774"
                 }
             }
         ],
